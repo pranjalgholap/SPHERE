@@ -1,12 +1,9 @@
-import './style.css'
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import * as dat from 'dat.gui'
+
 
 // Loading
 const textureLoader = new THREE.TextureLoader()
 
-const normalTexture = textureLoader.load('/textures/NormalMap.png')
+const normalTexture = textureLoader.load('NormalMap.png')
 
 // Debug
 const gui = new dat.GUI()
