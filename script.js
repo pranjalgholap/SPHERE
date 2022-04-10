@@ -6,7 +6,7 @@ const textureLoader = new THREE.TextureLoader()
 const normalTexture = textureLoader.load('NormalMap.png')
 
 // Debug
-const gui = new dat.GUI()
+//const gui = new dat.GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -45,12 +45,12 @@ pointLight2.intensity = 10
 
 scene.add(pointLight2)
 
-const light1 = gui.addFolder('Light 1')
+//const light1 = gui.addFolder('Light 1')
 
-light1.add(pointLight2.position, 'y').min(-3).max(3).step(0.01)
-light1.add(pointLight2.position, 'x').min(-6).max(3).step(0.01)
-light1.add(pointLight2.position, 'z').min(-3).max(3).step(0.01)
-light1.add(pointLight2, 'intensity').min(0).max(10).step(0.01)
+//light1.add(pointLight2.position, 'y').min(-3).max(3).step(0.01)
+//light1.add(pointLight2.position, 'x').min(-6).max(3).step(0.01)
+//light1.add(pointLight2.position, 'z').min(-3).max(3).step(0.01)
+//light1.add(pointLight2, 'intensity').min(0).max(10).step(0.01)
 
 //const pointLightHelper = new THREE.PointLightHelper(pointLight2, 1)
 //scene.add(pointLightHelper)
