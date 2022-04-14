@@ -2,8 +2,8 @@
 // Loading
 const textureLoader = new THREE.TextureLoader()
 
-const normalTextureEarth = textureLoader.load('./Earth.jpg')
-const normalTextureSun = textureLoader.load('./Sun.jpg')
+const normalTextureEarth = textureLoader.load('./Earth.png')
+const normalTextureSun = textureLoader.load('./Sun.png')
 
 // Debug
 //const gui = new dat.GUI()
