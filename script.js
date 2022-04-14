@@ -15,24 +15,24 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Objects
-const Earthgeometry = new THREE.SphereBufferGeometry( .3, 64, 64 );
-const Sungeometry = new THREE.SphereBufferGeometry( .5, 64, 64);
+const Sungeometry = new THREE.SphereBufferGeometry( .4, 64, 64);
+const Earthgeometry = new THREE.SphereBufferGeometry( .2, 64, 64 );
 
 // Materials
 
 const Earthmaterial = new THREE.MeshStandardMaterial()
 Earthmaterial.metalness = 0
-Earthmaterial.roughness = 0.2
-Earthmaterial.normalMap = normalTextureEarth;
+Earthmaterial.roughness = 0.4
+Earthmaterial.map = normalTextureEarth;
 
 const Sunmaterial = new THREE.MeshStandardMaterial()
 Sunmaterial.transparent = true
 Sunmaterial.opacity = 0.9
 Sunmaterial.metalness = 0
 Sunmaterial.roughness = 0.3
-Sunmaterial.normalMap = normalTextureSun;
+Sunmaterial.map = normalTextureSun;
 
-Sunmaterial.color = new THREE.Color(0x292929)
+Sunmaterial.color = new THREE.Color(0xfff917)
 
 // Mesh
 const sphereEarth = new THREE.Mesh(Earthgeometry,Earthmaterial)
@@ -42,7 +42,7 @@ sphereSun.add(sphereEarth)
 
 // Lights
 
-const pointLight = new THREE.PointLight(0xffffff, 2)
+const pointLight = new THREE.PointLight(0xffffff, 3)
 pointLight.position.x = 0
 pointLight.position.y = 0
 pointLight.position.z = 0
@@ -166,7 +166,7 @@ const updateSphere = (event) => {
     sphere.position.y = window.scrollY * .001
 }
 
-window.addEventListener('scroll',updateSphere);
+window.addEventListener('scroll', updateSphere);
 
 const clock = new THREE.Clock()
 
@@ -178,7 +178,7 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
 
     // Update objects
-    sphereSun.rotation.y = .5 * elapsedTime
+    sphereSun.rotation.z = .5 * elapsedTime
 
     sphereSun.rotation.y += .5 * (targetX - sphereSun.rotation.y)
     sphereSun.rotation.x += .05 * (targetY - sphereSun.rotation.x)
