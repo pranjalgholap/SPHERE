@@ -1,16 +1,12 @@
-import './style.css'
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import * as dat from 'dat.gui'
 
 // Loading
 const textureLoader = new THREE.TextureLoader()
 
-const normalTextureEarth = textureLoader.load('/textures/Earth.jpg')
-const normalTextureSun = textureLoader.load('/textures/Sun.jpg')
+const normalTextureEarth = textureLoader.load('Earth.jpg')
+const normalTextureSun = textureLoader.load('Sun.jpg')
 
 // Debug
-const gui = new dat.GUI()
+//const gui = new dat.GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
