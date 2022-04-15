@@ -15,20 +15,20 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Objects
-const Sungeometry = new THREE.SphereBufferGeometry( .4, 64, 64);
+const Sungeometry = new THREE.SphereBufferGeometry( .5, 64, 64);
 const Earthgeometry = new THREE.SphereBufferGeometry( .2, 64, 64 );
 
 // Materials
 
 const Earthmaterial = new THREE.MeshStandardMaterial()
-Earthmaterial.metalness = 0
-Earthmaterial.roughness = 0.4
+Earthmaterial.metalness = 0.1
+Earthmaterial.roughness = 0.5
 Earthmaterial.map = normalTextureEarth;
 
 const Sunmaterial = new THREE.MeshStandardMaterial()
 Sunmaterial.transparent = true
 Sunmaterial.opacity = 0.9
-Sunmaterial.metalness = 0
+Sunmaterial.metalness = 0.1
 Sunmaterial.roughness = 0.3
 Sunmaterial.map = normalTextureSun;
 
