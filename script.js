@@ -17,17 +17,17 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-const sun_geo = new THREE.SphereBufferGeometry(16, 30, 30)
-const mercury_geo = new THREE.SphereBufferGeometry(3.2, 30, 30)
-const venus_geo = new THREE.SphereBufferGeometry(5.8, 30, 30)
-const earth_geo = new THREE.SphereBufferGeometry(6, 30, 30)
-const mars_geo = new THREE.SphereBufferGeometry(4, 30, 30)
-const jupiter_geo = new THREE.SphereBufferGeometry(12, 30, 30)
-const saturn_geo = new THREE.SphereBufferGeometry(10, 30, 30)
+const sun_geo = new THREE.SphereBufferGeometry(0.9, 64, 64)
+const mercury_geo = new THREE.SphereBufferGeometry(0.2, 64, 64)
+const venus_geo = new THREE.SphereBufferGeometry(0.5, 64, 64)
+const earth_geo = new THREE.SphereBufferGeometry(0.5, 64, 64)
+const mars_geo = new THREE.SphereBufferGeometry(0.4, 64, 64)
+const jupiter_geo = new THREE.SphereBufferGeometry(0.6, 64, 64)
+const saturn_geo = new THREE.SphereBufferGeometry(0.4, 64, 64)
 const saturnring_geo = new THREE.SphereBufferGeometry(.45, 64, 64)
-const uranus_geo = new THREE.SphereBufferGeometry(7, 30, 30)
-const neptune_geo = new THREE.RingBufferGeometry(7, 30, 30)
-const pluto_geo = new THREE.RingBufferGeometry(10, 20, 32)
+const uranus_geo = new THREE.SphereBufferGeometry(.45, 64, 64)
+const neptune_geo = new THREE.RingBufferGeometry(0.4, 64, 64)
+const pluto_geo = new THREE.RingBufferGeometry(0.2, 64, 64)
 
 // Materials
 
