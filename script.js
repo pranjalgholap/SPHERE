@@ -94,7 +94,7 @@ const saturn = new THREE.Mesh(saturngeometry,satrunMaterial)
 
 
 // Mesh
-const sun = new THREE.Mesh(Sungeometry,Sunmaterial)
+const sun = new THREE.Mesh(sungeometry,sunmaterial)
 scene.add(sun)
 scene.add(earth)
 scene.add(saturn)
