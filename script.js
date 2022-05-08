@@ -1,115 +1,110 @@
+
+
+
 const textureLoader = new THREE.TextureLoader()
 
 const sunTexture = textureLoader.load('./sun.jpg')
-const mercuryTexture = textureLoader.load('./mercury.jpg')
-const venusTexture = textureLoader.load('./venus.jpg')
 const earthTexture = textureLoader.load('./earth.jpg')
-const marsTexture = textureLoader.load('./mars.jpg')
 const jupiterTexture = textureLoader.load('./jupiter.jpg')
 const saturnTexture = textureLoader.load('./saturn.jpg')
+const mercuryTexture = textureLoader.load('./mercury.jpg')
+const venusTexture = textureLoader.load('./venus.jpg')
+const marsTexture = textureLoader.load('./mars.jpg')
+const neptuneTexture = textureLoader.load('./neptune.jpg')
 const saturnringTexture = textureLoader.load('./saturn ring.png')
 const uranusTexture = textureLoader.load('./uranus.jpg')
-const neptuneTexture = textureLoader.load('./neptune.jpg')
-const plutoTexture = textureLoader.load('./pluto.jpg')
 
 const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
 
-const sun_geo = new THREE.SphereBufferGeometry(.9, 64, 64)
-const mercury_geo = new THREE.SphereBufferGeometry(.2, 64, 64)
-const venus_geo = new THREE.SphereBufferGeometry(.5, 64, 64)
-const earth_geo = new THREE.SphereBufferGeometry(.5, 64, 64)
-const mars_geo = new THREE.SphereBufferGeometry(.4, 64, 64)
-const jupiter_geo = new THREE.SphereBufferGeometry(.6, 64, 64)
-const saturn_geo = new THREE.SphereBufferGeometry(.4, 64, 64)
-const saturnring_geo = new THREE.SphereBufferGeometry(.5, 0.7, 60)
-const uranus_geo = new THREE.SphereBufferGeometry(.45, 64, 64)
-const neptune_geo = new THREE.RingBufferGeometry(.4, 64, 64)
-const pluto_geo = new THREE.RingBufferGeometry(.2, 64, 64)
+const sungeometry = new THREE.SphereBufferGeometry(.9, 64, 64)
+const earthgeometry = new THREE.SphereBufferGeometry(.5, 64, 64)
+const mercurygeometry = new THREE.SphereBufferGeometry(.2, 64, 64)
+const venusgeometry = new THREE.SphereBufferGeometry(.5, 64, 64)
+const marsgeometry = new THREE.SphereBufferGeometry(.4, 64, 64)
+const jupitergeometry = new THREE.SphereBufferGeometry(.6, 64, 64)
+const saturngeometry = new THREE.SphereBufferGeometry(.4, 64, 64)
+const uranusgeometry = new THREE.SphereBufferGeometry(.45, 64, 64)
+const nNeptunegeometry = new THREE.SphereBufferGeometry(.4, 64, 64)
+const saturnringgeometry = new THREE.RingBufferGeometry(.5, .7, 60)
 
 // Materials
 
-const sun_mat = new THREE.MeshStandardMaterial()
-sun_mat.transparent = true
-sun_mat.opacity = 0.9
-sun_mat.metalness = 0
-sun_mat.roughness = 0.3
-sun_mat.map = sunTexture;
-sun_mat.color = new THREE.Color( 0xfff917 )
+const sunmaterial = new THREE.MeshStandardMaterial()
+sunmaterial.transparent = true
+sunmaterial.opacity = 0.9
+sunmaterial.metalness = 0
+sunmaterial.roughness = 0.3
+sunmaterial.map = sunTexture;
+sunmaterial.color = new THREE.Color( 0xfff917 )
 
-const mercury_mat = new THREE.MeshStandardMaterial()
-mercury_mat.roughness = 0.3
-mercury_mat.opacity = 0.9
-mercury_mat.map = mercuryTexture
-const mercury = new THREE.Mesh(mercury_geo,mercury_mat)
+const earthmaterial = new THREE.MeshStandardMaterial()
+earthmaterial.roughness = 0.3
+earthmaterial.opacity = 0.9
+earthmaterial.map = earthTexture;
+const earth = new THREE.Mesh(earthgeometry,earthmaterial)
 
-const venus_mat = new THREE.MeshStandardMaterial()
-venus_mat.roughness = 0.3
-venus_mat.opacity = 0.9
-venus_mat.map = venusTexture
-const venus = new THREE.Mesh(venus_geo,venus_mat)
+const mercurymaterial = new THREE.MeshStandardMaterial()
+mercurymaterial.roughness = 0.3
+mercurymaterial.opacity = 0.9
+mercurymaterial.map = mercuryTexture
+const mercury = new THREE.Mesh(mercurygeometry,mercurymaterial)
 
-const earth_mat = new THREE.MeshStandardMaterial()
-earth_mat.roughness = 0.3
-earth_mat.opacity = 0.9
-earth_mat.map = earthTexture;
-const earth = new THREE.Mesh(earth_geo,earth_mat)
+const venusmaterial = new THREE.MeshStandardMaterial()
+venusmaterial.roughness = 0.3
+venusmaterial.opacity = 0.9
+venusmaterial.map = venusTexture
+const venus = new THREE.Mesh(venusgeometry,venusmaterial)
 
-const mars_mat = new THREE.MeshStandardMaterial()
-mars_mat.roughness = 0.3
-mars_mat.opacity = 0.9
-mars_mat.map = marsTexture
-const mars = new THREE.Mesh(mars_geo,mars_mat)
+const jupitermaterial = new THREE.MeshStandardMaterial()
+jupitermaterial.roughness = 0.3
+jupitermaterial.opacity = 0.9
+jupitermaterial.map = jupiterTexture
+const jupiter = new THREE.Mesh(jupitergeometry,jupitermaterial)
 
-const jupiter_mat = new THREE.MeshStandardMaterial()
-jupiter_mat.roughness = 0.3
-jupiter_mat.opacity = 0.9
-jupiter_mat.map = jupiterTexture
-const jupiter = new THREE.Mesh(jupiter_geo,jupiter_mat)
+const uranusmaterial = new THREE.MeshStandardMaterial()
+uranusmaterial.roughness = 0.3
+uranusmaterial.opacity = 0.9
+uranusmaterial.map = uranusTexture
+const uranus = new THREE.Mesh(uranusgeometry,uranusmaterial)
 
-const saturn_mat = new THREE.MeshStandardMaterial()
-saturn_mat.opacity = 0.9
-saturn_mat.roughness = 0.3
-saturn_mat.map = saturnTexture
-const saturn = new THREE.Mesh(saturn_geo,saturn_mat)
+const neptunematerial = new THREE.MeshStandardMaterial()
+neptunematerial.roughness = 0.3
+neptunematerial.opacity = 0.9
+neptunematerial.map = neptuneTexture
+const neptune = new THREE.Mesh(neptunegeometry,neptunematerial)
 
-const saturnring_mat = new THREE.MeshBasicMaterial()
-saturnring_mat.map = saturnringTexture
-const saturnring = new THREE.Mesh(saturnring_geo,saturnring_mat)
+const saturnringMaterial = new THREE.MeshBasicMaterial()
+saturnringMaterial.map = saturnringTexture
+const saturnring = new THREE.Mesh(saturnringgeometry,saturnringMaterial)
 
-const uranus_mat = new THREE.MeshStandardMaterial()
-uranus_mat.roughness = 0.3
-uranus_mat.opacity = 0.9
-uranus_mat.map = uranusTexture
-const uranus = new THREE.Mesh(uranus_geo,uranus_mat)
+const marsmaterial = new THREE.MeshStandardMaterial()
+marsmaterial.roughness = 0.3
+marsmaterial.opacity = 0.9
+marsmaterial.map = marsTexture
+const mars = new THREE.Mesh(marsgeometry,marsmaterial)
 
-const neptune_mat = new THREE.MeshStandardMaterial()
-neptune_mat.roughness = 0.3
-neptune_mat.opacity = 0.9
-neptune_mat.map = neptuneTexture
-const neptune = new THREE.Mesh(neptune_geo,neptune_mat)
+const satrunMaterial = new THREE.MeshStandardMaterial()
+satrunMaterial.roughness = 0.3
+satrunMaterial.opacity = 0.9
+satrunMaterial.map = saturnTexture
+const saturn = new THREE.Mesh(saturngeometry,satrunMaterial)
 
-const pluto_mat = new THREE.MeshStandardMaterial()
-pluto_mat.roughness = 0.3
-pluto_mat.opacity = 0.9
-pluto_mat.map = plutoTexture
-const pluto = new THREE.Mesh(pluto_geo,pluto_mat)
 
 // Mesh
-const sun = new THREE.Mesh(sun_geo,sun_mat)
+const sun = new THREE.Mesh(Sungeometry,Sunmaterial)
 scene.add(sun)
-scene.add(mercury)
-scene.add(venus)
 scene.add(earth)
-scene.add(mars)
-scene.add(jupiter)
 scene.add(saturn)
 saturn.add(saturnring)
+scene.add(mercury)
+scene.add(venus)
+scene.add(mars)
+scene.add(jupiter)
 scene.add(uranus)
 scene.add(neptune)
-scene.add(pluto)
 
 const loader = new THREE.TextureLoader();
 scene.background = loader.load('./stars.jpg' , function(texture)
@@ -201,7 +196,6 @@ const updateSphere = (event) => {
     saturn.position.y = window.scrollY * .001
     uranus.position.y = window.scrollY * .001
     neptune.position.y = window.scrollY * .001
-    pluto.position.y = window.scrollY * .001
 }
 
 window.addEventListener('scroll', updateSphere);
@@ -226,7 +220,7 @@ const tick = () =>
     earth.rotation.y += .05 * (targetX - earth.rotation.y)
     earth.rotation.x += .05 * (targetY - earth.rotation.x)
     earth.position.z += -.05 * (targetY - earth.rotation.x)
-    
+            
     mercury.rotation.z = 1 * elapsedTime
     mercury.rotation.y += .05 * (targetX - earth.rotation.y)
     mercury.rotation.x += .05 * (targetY - earth.rotation.x)
@@ -261,11 +255,6 @@ const tick = () =>
     neptune.rotation.y += .05 * (targetX - earth.rotation.y)
     neptune.rotation.x += .05 * (targetY - earth.rotation.x)
     neptune.position.z += -.05 * (targetY - earth.rotation.x)
-    
-    pluto.rotation.z = 1 * elapsedTime
-    pluto.rotation.y += .05 * (targetX - earth.rotation.y)
-    pluto.rotation.x += .05 * (targetY - earth.rotation.x)
-    pluto.position.z += -.05 * (targetY - earth.rotation.x)
 
     const rotationOfMercury = Date.now() * 0.0010;
     mercury.position.x = 2 * Math.cos(rotationOfMercury)
@@ -299,10 +288,6 @@ const tick = () =>
     const rotationOfNeptune = Date.now() * 0.0003;
     neptune.position.x = 9.2 * Math.cos(rotationOfNeptune)
     neptune.position.y = 6.2 * Math.sin(rotationOfNeptune)
-    
-    const rotationOfPluto = Date.now() * 0.0002;
-    pluto.position.x = 10 * Math.cos(rotationOfPluto)
-    pluto.position.y = 7 * Math.sin(rotationOfPluto)
     
     // Update Orbital Controls
     // controls.update()
