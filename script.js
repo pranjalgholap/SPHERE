@@ -1,184 +1,143 @@
+import starsTexture from '../images/stars.jpg'
+import sunTexture from '../images/sun.jpg'
+import mercuryTexture from '../images/mercury.jpg'
+import venusTexture from '../images/venus.jpg'
+import earthTexture from '../images/earth.jpg'
+import marsTexture from '../images/mars.jpg'
+import jupiterTexture from '../images/jupiter.jpg'
+import saturnTexture from '../images/saturn.jpg'
+import saturnRingTexture from '../images/saturn ring.png'
+import uranusTexture from '../images/uranus.jpg'
+import neptuneTexture from '../images/neptune.jpg'
+import plutoTexture from '../images/pluto.jpg'
 
+const renderer = new THREE.WebGLRenderer()
 
-// Loading
-const textureLoader = new THREE.TextureLoader()
+renderer.setSize(window.innerWidth, window.innerHeight)
 
-const normalTexture = textureLoader.load('NormalMap.png')
-
-// Debug
-//const gui = new dat.GUI()
-
-// Canvas
-const canvas = document.querySelector('canvas.webgl')
-
-// Scene
-const scene = new THREE.Scene()
-
-// Objects
-const geometry = new THREE.SphereBufferGeometry( .5, 64, 64 );
-
-// Materials
-
-const material = new THREE.MeshStandardMaterial()
-material.metalness = 0.7
-material.roughness = 0.2
-material.normalMap = normalTexture;
-
-material.color = new THREE.Color(0x292929)
-
-// Mesh
-const sphere = new THREE.Mesh(geometry,material)
-scene.add(sphere)
-
-// Lights
-
-const pointLight = new THREE.PointLight(0xffffff, 0.1)
-pointLight.position.x = 2
-pointLight.position.y = 3
-pointLight.position.z = 4
-scene.add(pointLight)
-
-// Light 2
-const pointLight2 = new THREE.PointLight(0xff0000, 2)
-pointLight2.position.set(-1.86,1,-1.65)
-pointLight2.intensity = 10
-
-scene.add(pointLight2)
-
-//const light1 = gui.addFolder('Light 1')
-
-//light1.add(pointLight2.position, 'y').min(-3).max(3).step(0.01)
-//light1.add(pointLight2.position, 'x').min(-6).max(3).step(0.01)
-//light1.add(pointLight2.position, 'z').min(-3).max(3).step(0.01)
-//light1.add(pointLight2, 'intensity').min(0).max(10).step(0.01)
-
-//const pointLightHelper = new THREE.PointLightHelper(pointLight2, 1)
-//scene.add(pointLightHelper)
-
-// Light 3
-
-const pointLight3 = new THREE.PointLight(0xe1ff, 2)
-pointLight3.position.set(2.13, -3, -1.98)
-pointLight3.intensity = 6.8
-
-scene.add(pointLight3)
-
-//const light2 = gui.addFolder('Light 2')
-
-//light2.add(pointLight3.position, 'y').min(-3).max(3).step(0.01)
-//light2.add(pointLight3.position, 'x').min(-6).max(3).step(0.01)
-//light2.add(pointLight3.position, 'z').min(-3).max(3).step(0.01)
-//light2.add(pointLight3, 'intensity').min(0).max(10).step(0.01)
-
-//const light2Color = {
-//    color: 0xff0000
-//}
-
-//light2.addColor(light2Color, 'color')
-//    .onChange(() => {
-//      pointLight3.color.set(light2Color.color)
-//  })
-
-//const pointLightHelper2 = new THREE.PointLightHelper(pointLight3, 1)
-//scene.add(pointLightHelper2)
+document.body.appendChild(renderer.domElement)
 
 /**
- * Sizes
+ * Scene
  */
-const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
-}
+const scene = new THREE.Scene()
 
-window.addEventListener('resize', () =>
-{
-    // Update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
+const camera = new THREE.PerspectiveCamera(
+    45,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+)
 
-    // Update camera
-    camera.aspect = sizes.width / sizes.height
-    camera.updateProjectionMatrix()
-
-    // Update renderer
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
+const orbit = new OrbitControls(camera, renderer.domElement)
 
 /**
  * Camera
  */
-// Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 0
-camera.position.y = 0
-camera.position.z = 2
-scene.add(camera)
+camera.position.set(-90, 140, 140)
+orbit.update()
 
-// Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
+const ambientLight = new THREE.AmbientLight(0x333333)
+scene.add(ambientLight)
 
-/**
- * Renderer
- */
-const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    alpha: true
+const cubeTextureLoader = new THREE.CubeTextureLoader()
+scene.background = cubeTextureLoader.load([
+    starsTexture,
+    starsTexture,
+    starsTexture,
+    starsTexture,
+    starsTexture,
+    starsTexture
+])
+
+const sunGeometry = new THREE.SphereGeometry(16, 30, 30)
+const sunMaterial = new THREE.MeshBasicMaterial({
+    map: textureLoader.load(sunTexture)
 })
-renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+const sun = new THREE.Mesh(sunGeometry, sunMaterial)
+scene.add(sun)
+
+function createPlanete(size, texture, position, ring) {
+    const geometry = new THREE.SphereGeometry(size, 30, 30)
+    const material = new THREE.MeshStandardMaterial({
+        map: textureLoader.load(texture)
+    })
+    const mesh = new THREE.Mesh(geometry, material)
+    const obj = new THREE.Object3D()
+    obj.add(mesh)
+    if(ring) {
+        const ringGeometry = new THREE.RingGeometry(
+            ring.innerRadius,
+            ring.outerRadius,
+            32)
+        const ringMaterial = new THREE.MeshBasicMaterial({
+            map: textureLoader.load(ring.texture),
+            side: THREE.DoubleSide
+        })
+        const ringMesh = new THREE.Mesh(ringGeometry, ringMaterial)
+        obj.add(ringMesh)
+        ringMesh.position.x = position
+        ringMesh.rotation.x = -0.5 * Math.PI
+    }
+    scene.add(obj)
+    mesh.position.x = position
+    return {mesh, obj}
+}
+
+const mercury = createPlanete(3.2, mercuryTexture, 28)
+const venus = createPlanete(5.8, venusTexture, 44)
+const earth = createPlanete(6, earthTexture, 62)
+const mars = createPlanete(4, marsTexture, 78)
+const jupiter = createPlanete(12, jupiterTexture, 100)
+const saturn = createPlanete(10, saturnTexture, 138, {
+    innerRadius: 10,
+    outerRadius: 20,
+    texture: saturnRingTexture
+})
+const uranus = createPlanete(7, uranusTexture, 176)
+const neptune = createPlanete(7, neptuneTexture, 200)
+const pluto = createPlanete(2.8, plutoTexture, 216)
+
+const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300)
+scene.add(pointLight)
+
 
 /**
  * Animate
  */
+function animate() {
+    //Self-rotation
+    sun.rotateY(0.004)
+    mercury.mesh.rotateY(0.004)
+    venus.mesh.rotateY(0.002)
+    earth.mesh.rotateY(0.02)
+    mars.mesh.rotateY(0.018)
+    jupiter.mesh.rotateY(0.04)
+    saturn.mesh.rotateY(0.038)
+    uranus.mesh.rotateY(0.03)
+    neptune.mesh.rotateY(0.032)
+    pluto.mesh.rotateY(0.008)
 
-document.addEventListener('mousemove', onDocumentMouseMove)
+    //Around-sun-rotation
+    mercury.obj.rotateY(0.04)
+    venus.obj.rotateY(0.015)
+    earth.obj.rotateY(0.01)
+    mars.obj.rotateY(0.008)
+    jupiter.obj.rotateY(0.002)
+    saturn.obj.rotateY(0.0009)
+    uranus.obj.rotateY(0.0004)
+    neptune.obj.rotateY(0.0001)
+    pluto.obj.rotateY(0.00007)
 
-let mouseX = 0
-let mouseY = 0
-
-let targetX = 0
-let targetY = 0
-
-const windowHalfX = window.innerWidth / 2;
-const windowHalfY = window.innerHeight / 2;
-
-function onDocumentMouseMove(event) {
-    mouseX = (event.clientX - windowHalfX)
-    mouseY = (event.clientY - windowHalfY)
-}
-
-const updateSphere = (event) => {
-    sphere.position.y = window.scrollY * .001
-}
-
-window.addEventListener('scroll',updateSphere);
-
-const clock = new THREE.Clock()
-
-const tick = () =>
-{
-    targetX = mouseX * .001
-    targetY = mouseY * .001
-
-    const elapsedTime = clock.getElapsedTime()
-
-    // Update objects
-    sphere.rotation.y = .5 * elapsedTime
-
-    sphere.rotation.y += .5 * (targetX - sphere.rotation.y)
-    sphere.rotation.x += .05 * (targetY - sphere.rotation.x)
-    sphere.position.z += -.05 * (targetY - sphere.rotation.x)
-
-    // Update Orbital Controls
-    // controls.update()
-
-    // Render
     renderer.render(scene, camera)
-
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick)
 }
 
-tick()
+renderer.setAnimationLoop(animate)
+
+window.addEventListener('resize', function() 
+{
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+
+    renderer.setSize(window.innerWidth, window.innerHeight)
+})
