@@ -7,8 +7,8 @@ const earthTexture = textureLoader.load('./earth.jpg')
 const marsTexture = textureLoader.load('./mars.jpg')
 const jupiterTexture = textureLoader.load('./jupiter.jpg')
 const saturnTexture = textureLoader.load('./saturn.jpg')
-const saturnringTexture = textureLoader.load('./saturn ring.jpg')
-const uranusTexture = textureLoader.load('./uranus.png')
+const saturnringTexture = textureLoader.load('./saturn ring.png')
+const uranusTexture = textureLoader.load('./uranus.jpg')
 const neptuneTexture = textureLoader.load('./neptune.jpg')
 const plutoTexture = textureLoader.load('./pluto.jpg')
 
@@ -112,7 +112,7 @@ scene.add(neptune)
 scene.add(pluto)
 
 const loader = new THREE.TextureLoader();
-scene.background = loader.load('./star.jpg' , function(texture)
+scene.background = loader.load('./stars.jpg' , function(texture)
             {
              scene.background = texture;  
             });
