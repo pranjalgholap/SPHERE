@@ -27,7 +27,7 @@ const marsgeometry = new THREE.SphereBufferGeometry(.4, 64, 64)
 const jupitergeometry = new THREE.SphereBufferGeometry(.6, 64, 64)
 const saturngeometry = new THREE.SphereBufferGeometry(.4, 64, 64)
 const uranusgeometry = new THREE.SphereBufferGeometry(.45, 64, 64)
-const nNeptunegeometry = new THREE.SphereBufferGeometry(.4, 64, 64)
+const neptunegeometry = new THREE.SphereBufferGeometry(.4, 64, 64)
 const saturnringgeometry = new THREE.RingBufferGeometry(.5, .7, 60)
 
 // Materials
