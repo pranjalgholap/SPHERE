@@ -201,6 +201,7 @@ const updateSphere = (event) => {
     saturn.position.y = window.scrollY * .001
     uranus.position.y = window.scrollY * .001
     neptune.position.y = window.scrollY * .001
+    pluto.position.y = window.scrollY * .001
 }
 
 window.addEventListener('scroll', updateSphere);
@@ -299,7 +300,7 @@ const tick = () =>
     neptune.position.x = 9.2 * Math.cos(rotationOfNeptune)
     neptune.position.y = 6.2 * Math.sin(rotationOfNeptune)
     
-    const rotationOfPluto = Date.now() * 0.0003;
+    const rotationOfPluto = Date.now() * 0.0002;
     pluto.position.x = 10 * Math.cos(rotationOfPluto)
     pluto.position.y = 7 * Math.sin(rotationOfPluto)
     
